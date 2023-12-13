@@ -3,6 +3,8 @@ package com.example.informationfinal;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -96,7 +98,39 @@ public class Mainpage implements Initializable {
 
         data = Student.getInfo();
         table.setItems(data);
+    }
 
+    private void Find(){
+        //searching operation using filteredlist
+        FilteredList<Student> filteredData = new FilteredList<>(data, p -> true);
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(myObject -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare first name and last name field in your object with filter.
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (String.valueOf(myObject.getStudentFname()).toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                    // Filter matches first name.
+                } else if (String.valueOf(myObject.getStudentLname()).toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }else if(String.valueOf(myObject.getStudentCourse()).toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }else if (String.valueOf(myObject.getStudentID()).toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }
+                return false; // Does not match.
+            });
+        });
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList sortedData = new SortedList<>(filteredData);
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(table.comparatorProperty());
+        // 5. Add sorted (and filtered) data to the table.
+        table.setItems(sortedData);
     }
 
     public void addStudent() {
@@ -252,6 +286,6 @@ public class Mainpage implements Initializable {
                 course_input.setText(newSelection.getStudentCourse());
             }
         });
-
+        Find();
     }
 }
