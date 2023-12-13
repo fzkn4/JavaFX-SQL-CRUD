@@ -44,7 +44,6 @@ public class HelloController{
     @FXML
     void validate(ActionEvent event) throws IOException {
         Validate();
-
         username.clear();
         password.clear();
 
@@ -78,7 +77,11 @@ public class HelloController{
     }
     @FXML
     void keyPressed(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.ENTER) Validate();
+        if (event.getCode() == KeyCode.ENTER){
+            Validate();
+            username.clear();
+            password.clear();
+        }
     }
 
     @FXML

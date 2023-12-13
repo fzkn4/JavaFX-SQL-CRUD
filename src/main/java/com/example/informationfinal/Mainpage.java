@@ -13,6 +13,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -24,6 +25,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Mainpage implements Initializable {
@@ -63,8 +65,10 @@ public class Mainpage implements Initializable {
     @FXML
     private Text user_name;
     private ObservableList<Student> data;
-    private DBConnect connects = new DBConnect();
-    private Connection con_pro = connects.getConnection();
+    private final DBConnect connects = new DBConnect();
+    private final Connection con_pro = connects.getConnection();
+    @FXML
+    private MFXTextField searchInput;
 
 
     @FXML
@@ -103,9 +107,9 @@ public class Mainpage implements Initializable {
             try {
                 PreparedStatement ps = con_pro.prepareStatement(insertSql);
                 ps.setString(1, idNumber_input.getText());
-                ps.setString(2, Fname_input.getText());
-                ps.setString(3, Lname_input.getText());
-                ps.setString(4, course_input.getText());
+                ps.setString(2, capitalize(Fname_input.getText()));
+                ps.setString(3, capitalize(Lname_input.getText()));
+                ps.setString(4, course_input.getText().toUpperCase());
 
                 ps.execute();
                     System.out.println("Successfully added.");
@@ -116,6 +120,10 @@ public class Mainpage implements Initializable {
                 clearTextFields();
             }
         }
+    }
+    private String capitalize(String str)
+    {
+        return str.substring(0,1).toUpperCase() + str.substring(1).toLowerCase();
     }
 
     private void getSelected(MouseEvent event) {
@@ -133,13 +141,13 @@ public class Mainpage implements Initializable {
         Connection connectDB = connectNow.getConnection();
 
         try {
-            String value1 = Fname_input.getText();
-            String value2 = Lname_input.getText();
-            String value3 = course_input.getText();
+            String value1 = capitalize(Fname_input.getText());
+            String value2 = capitalize(Lname_input.getText());
+            String value3 = course_input.getText().toUpperCase();
             String value4 = idNumber_input.getText();
 
             String sql = "UPDATE students SET fname=?, lname=?, Course=? WHERE studentID=?";
-                PreparedStatement pst = connectDB.prepareStatement(sql);
+            PreparedStatement pst = connectDB.prepareStatement(sql);
                 pst.setString(1, value1);
                 pst.setString(2, value2);
                 pst.setString(3, value3);
@@ -148,6 +156,8 @@ public class Mainpage implements Initializable {
                 pst.execute();
                 System.out.println("Successfully Updated.");
                 updateTable();
+                pst.close();
+                connectDB.close();
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Update Failed.");
@@ -156,6 +166,12 @@ public class Mainpage implements Initializable {
     @FXML
     void deleteData(ActionEvent event) {
         Delete();
+        idNumber_input.setText(String.valueOf(Student.nextID()));
+    }
+
+    @FXML
+    void clearText(ActionEvent event) {
+        clearTextFields();
         idNumber_input.setText(String.valueOf(Student.nextID()));
     }
 
@@ -198,6 +214,28 @@ public class Mainpage implements Initializable {
             e.printStackTrace();
             System.out.println("Deletion Failed.");
         }
+    }
+
+
+    @FXML
+    void search(InputMethodEvent event) {
+        DBConnect connectNow = new DBConnect();
+        Connection connectDB = connectNow.getConnection();
+
+        try {
+            String sql = "SELECT * FROM students WHERE fname=? or lname=? or Course=?";
+            PreparedStatement pst = connectDB.prepareStatement(sql);
+            pst.setString(1, searchInput.getText());
+
+            pst.execute();
+            updateTable();
+            pst.close();
+            connectDB.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Search Failed.");
+        }
+
     }
 
     @Override

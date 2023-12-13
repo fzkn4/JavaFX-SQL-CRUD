@@ -1,6 +1,6 @@
 .table-view .column-header,
 .table-view .column-header-background .filler {
-    -fx-background-color:   #3e4754;
+    -fx-background-color:  #3e4754;
     -fx-border-color:  #3e4754;
 }
 .table-row-cell{
@@ -17,7 +17,7 @@
 
 .table-view .cell{
     -fx-alignment: center;
-    -fx-background-color:  #1F2431;
+    -fx-background-color: #1F2431;
     -fx-text-fill: white;
 
 }

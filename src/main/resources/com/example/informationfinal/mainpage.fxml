@@ -15,21 +15,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="467.0" prefWidth="699.0" style="-fx-background-color: #1F2431;" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.informationfinal.Mainpage">
+<AnchorPane prefHeight="430.0" prefWidth="703.0" style="-fx-background-color: #1F2431; -fx-border-color: #3B4252;" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.informationfinal.Mainpage">
    <children>
-      <BorderPane prefHeight="467.0" prefWidth="699.0" style="-fx-background-radius: 5px;">
+      <BorderPane prefHeight="419.0" prefWidth="701.0" style="-fx-background-radius: 5px;">
          <top>
-            <Pane prefHeight="67.0" prefWidth="677.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="67.0" prefWidth="751.0" BorderPane.alignment="CENTER">
                <children>
-                  <MFXButton buttonType="RAISED" layoutX="644.0" layoutY="19.0" onAction="#exit" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #F05454; -fx-text-fill: white; -fx-border-radius: 5px; -fx-border-color: #F05454;" stylesheets="@css/MFXButton.css" text="x" />
-                  <MFXButton buttonType="RAISED" layoutX="568.0" layoutY="18.0" onAction="#logout" prefHeight="28.0" prefWidth="69.0" style="-fx-background-color: #3B4252; -fx-border-radius: 5px;" stylesheets="@css/MFXButton.css" text="Logout" />
-                  <Text fx:id="user_name" fill="#fff9f9" layoutX="68.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="68.0">
+                  <MFXButton layoutX="644.0" layoutY="19.0" onAction="#exit" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #F05454; -fx-text-fill: white; -fx-border-radius: 5px; -fx-border-color: #F05454;" stylesheets="@css/MFXButton.css" text="x" />
+                  <MFXButton layoutX="568.0" layoutY="18.0" onAction="#logout" prefHeight="28.0" prefWidth="69.0" style="-fx-background-color: #3B4252; -fx-border-radius: 5px;" stylesheets="@css/MFXButton.css" text="Logout" />
+                  <Text fx:id="user_name" fill="#fff9f9" layoutX="72.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="68.0">
                      <font>
                         <Font name="Roboto Light" size="12.0" />
                      </font>
                   </Text>
-                  <MFXTextField floatMode="DISABLED" layoutX="210.0" layoutY="19.0" prefHeight="19.0" prefWidth="182.0" style="-fx-alignment: center;" stylesheets="@css/MFXTextField.css" />
-                  <MFXButton layoutX="398.0" layoutY="18.0" prefHeight="28.0" prefWidth="69.0" style="-fx-background-color: #3B4252; -fx-text-fill: white; -fx-border-radius: 5px;" stylesheets="@css/MFXButton.css" text="Search" />
+                  <MFXTextField fx:id="searchInput" floatMode="DISABLED" layoutX="210.0" layoutY="19.0" prefHeight="19.0" prefWidth="182.0" style="-fx-alignment: center;" stylesheets="@css/MFXTextField.css" />
+                  <MFXButton layoutX="398.0" layoutY="18.0" onAction="#search" prefHeight="28.0" prefWidth="69.0" style="-fx-background-color: #3B4252; -fx-text-fill: white; -fx-border-radius: 5px;" stylesheets="@css/MFXButton.css" text="Search" />
                   <ImageView fitHeight="37.0" fitWidth="35.0" layoutX="26.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/user.png" />
@@ -46,11 +46,11 @@
             </Pane>
          </top>
          <center>
-            <Pane prefHeight="200.0" prefWidth="673.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="380.0" prefWidth="699.0" BorderPane.alignment="CENTER">
                <children>
-                  <MFXScrollPane layoutX="350.0" layoutY="-2.0" prefHeight="371.0" prefWidth="322.0" style="-fx-background-color: #1F2431;" stylesheets="@css/MFXScrollPane.css">
+                  <MFXScrollPane layoutX="325.0" layoutY="14.0" prefHeight="277.0" prefWidth="347.0" style="-fx-background-color: #1F2431; -fx-border-color: #3B4252;" stylesheets="@css/MFXScrollPane.css">
                      <content>
-                        <TableView fx:id="table" prefHeight="367.0" prefWidth="319.0" style="-fx-background-radius: 5px; -fx-border-radius: 5px; -fx-border-color: #1F2431;" stylesheets="@css/tableStyle.css">
+                        <TableView fx:id="table" prefHeight="273.0" prefWidth="342.0" style="-fx-background-radius: 5px; -fx-border-radius: 5px; -fx-border-color: #1F2431; -fx-background-color: #1F2431;" stylesheets="@css/tableStyle.css">
                            <columns>
                               <TableColumn fx:id="id_no" editable="false" prefWidth="74.0" style="-fx-alignment: center; -fx-border-color: transparent;" text="ID no" />
                               <TableColumn fx:id="f_name" editable="false" prefWidth="81.0" style="-fx-alignment: center; -fx-border-color: transparent;" text="First Name" />
@@ -63,20 +63,25 @@
                         </TableView>
                      </content>
                   </MFXScrollPane>
-                  <Pane layoutX="26.0" prefHeight="367.0" prefWidth="315.0" style="-fx-background-color: #1F2431; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-background-radius: 4px; -fx-border-color: #4C566A;">
+                  <Pane layoutX="28.0" prefHeight="350.0" prefWidth="280.0" style="-fx-background-color: #1F2431; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-background-radius: 4px; -fx-border-color: #1F2431;">
                      <children>
-                        <Text fill="#dadada" layoutX="89.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration Form">
+                        <Text fill="WHITE" layoutX="57.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register Student">
                            <font>
-                              <Font name="Roboto Light" size="19.0" />
+                              <Font name="Roboto Light" size="23.0" />
                            </font>
                         </Text>
-                        <MFXTextField fx:id="Fname_input" floatMode="ABOVE" floatingText="First Name" layoutX="32.0" layoutY="82.0" prefHeight="33.0" prefWidth="250.0" style="-fx-alignment: center;" stylesheets="@css/MFXTextField.css" />
-                        <MFXTextField fx:id="Lname_input" floatMode="ABOVE" floatingText="Last Name" layoutX="32.0" layoutY="152.0" prefHeight="32.0" prefWidth="250.0" style="-fx-alignment: center;" stylesheets="@css/MFXTextField.css" />
-                        <MFXTextField fx:id="idNumber_input" editable="false" floatMode="ABOVE" floatingText="ID" layoutX="32.0" layoutY="218.0" prefHeight="30.0" prefWidth="118.0" style="-fx-alignment: center;" stylesheets="@css/MFXTextField.css" />
-                        <MFXTextField fx:id="course_input" floatMode="ABOVE" floatingText="Course" layoutX="165.0" layoutY="218.0" prefHeight="30.0" prefWidth="118.0" style="-fx-alignment: center;" stylesheets="@css/MFXTextField.css" />
-                        <MFXButton fx:id="save" layoutX="23.0" layoutY="312.0" onAction="#saveData" prefHeight="35.0" prefWidth="82.0" style="-fx-background-color: #3B4252; -fx-border-radius: 4px; -fx-text-fill: white;" stylesheets="@css/MFXButton.css" text="Save" />
-                        <MFXButton fx:id="update" layoutX="117.0" layoutY="312.0" onAction="#updateData" prefHeight="35.0" prefWidth="82.0" style="-fx-border-radius: 4px; -fx-text-fill: white; -fx-background-color: #3B4252;" stylesheets="@css/MFXButton.css" text="Update" />
-                        <MFXButton layoutX="211.0" layoutY="312.0" onAction="#deleteData" prefHeight="35.0" prefWidth="82.0" style="-fx-background-color: #3B4252; -fx-border-radius: 4px; -fx-text-fill: white;" stylesheets="@css/MFXButton.css" text="Delete" />
+                        <MFXTextField fx:id="Fname_input" floatMode="ABOVE" floatingText="First Name" layoutX="14.0" layoutY="101.0" prefHeight="33.0" prefWidth="250.0" style="-fx-alignment: center;" stylesheets="@css/MFXTextField.css" />
+                        <MFXTextField fx:id="Lname_input" floatMode="ABOVE" floatingText="Last Name" layoutX="14.0" layoutY="170.0" prefHeight="32.0" prefWidth="250.0" style="-fx-alignment: center;" stylesheets="@css/MFXTextField.css" />
+                        <MFXTextField fx:id="idNumber_input" editable="false" floatMode="ABOVE" floatingText="ID" layoutX="14.0" layoutY="236.0" prefHeight="30.0" prefWidth="118.0" style="-fx-alignment: center;" stylesheets="@css/MFXTextField.css" />
+                        <MFXTextField fx:id="course_input" floatMode="ABOVE" floatingText="Course" layoutX="147.0" layoutY="236.0" prefHeight="30.0" prefWidth="118.0" style="-fx-alignment: center;" stylesheets="@css/MFXTextField.css" />
+                        <MFXButton fx:id="save" layoutX="91.0" layoutY="301.0" onAction="#saveData" prefHeight="35.0" prefWidth="82.0" style="-fx-background-color: #3B4252; -fx-border-radius: 4px; -fx-text-fill: white;" stylesheets="@css/MFXButton.css" text="Add" />
+                        <MFXButton layoutX="183.0" layoutY="301.0" onAction="#clearText" prefHeight="35.0" prefWidth="82.0" style="-fx-background-color: #3B4252; -fx-border-radius: 4px; -fx-text-fill: white;" stylesheets="@css/MFXButton.css" text="Clear" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="325.0" layoutY="296.0" prefHeight="49.0" prefWidth="353.0">
+                     <children>
+                        <MFXButton fx:id="update" layoutY="5.0" onAction="#updateData" prefHeight="35.0" prefWidth="82.0" style="-fx-border-radius: 4px; -fx-text-fill: white; -fx-background-color: #3B4252;" stylesheets="@css/MFXButton.css" text="Update" />
+                        <MFXButton layoutX="93.0" layoutY="5.0" onAction="#deleteData" prefHeight="35.0" prefWidth="82.0" style="-fx-background-color: #3B4252; -fx-border-radius: 4px; -fx-text-fill: white;" stylesheets="@css/MFXButton.css" text="Delete" />
                      </children>
                   </Pane>
                </children>
@@ -84,7 +89,4 @@
          </center>
       </BorderPane>
    </children>
-   <effect>
-      <DropShadow blurType="GAUSSIAN" height="26.38" radius="12.69" spread="0.11" width="26.38" />
-   </effect>
 </AnchorPane>
