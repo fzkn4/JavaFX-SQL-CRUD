@@ -100,17 +100,17 @@ public class Mainpage implements Initializable {
         table.setItems(data);
     }
 
+    //searching operation using filteredlist
     private void Find(){
-        //searching operation using filteredlist
         FilteredList<Student> filteredData = new FilteredList<>(data, p -> true);
-        // 2. Set the filter Predicate whenever the filter changes.
+        //Set the filter Predicate whenever the filter changes.
         searchInput.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(myObject -> {
-                // If filter text is empty, display all persons.
+                // If filter text is empty, display all records of the students.
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-                // Compare first name and last name field in your object with filter.
+                // Compare first name, last name, student id, course field in your object with filter.
                 String lowerCaseFilter = newValue.toLowerCase();
                 if (String.valueOf(myObject.getStudentFname()).toLowerCase().contains(lowerCaseFilter)) {
                     return true;
@@ -118,18 +118,18 @@ public class Mainpage implements Initializable {
                 } else if (String.valueOf(myObject.getStudentLname()).toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Filter matches last name.
                 }else if(String.valueOf(myObject.getStudentCourse()).toLowerCase().contains(lowerCaseFilter)){
-                    return true;
+                    return true; //Filter mathces course.
                 }else if (String.valueOf(myObject.getStudentID()).toLowerCase().contains(lowerCaseFilter)){
-                    return true;
+                    return true; //Filter matches studentID.
                 }
                 return false; // Does not match.
             });
         });
-        // 3. Wrap the FilteredList in a SortedList.
+        // Wrap the FilteredList in a SortedList.
         SortedList sortedData = new SortedList<>(filteredData);
-        // 4. Bind the SortedList comparator to the TableView comparator.
+        //Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(table.comparatorProperty());
-        // 5. Add sorted (and filtered) data to the table.
+        //Add sorted (and filtered) data to the table.
         table.setItems(sortedData);
     }
 
@@ -269,8 +269,9 @@ public class Mainpage implements Initializable {
             e.printStackTrace();
             System.out.println("Search Failed.");
         }
-
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
